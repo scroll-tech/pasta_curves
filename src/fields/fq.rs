@@ -172,6 +172,7 @@ impl<'a, 'b> Mul<&'b Fq> for &'a Fq {
 
 impl_binops_additive!(Fq, Fq);
 impl_binops_multiplicative!(Fq, Fq);
+impl_binops_multiplicative_additive!(Fq, Fq);
 
 impl<T: ::core::borrow::Borrow<Fq>> ::core::iter::Sum<T> for Fq {
     fn sum<I: Iterator<Item = T>>(iter: I) -> Self {

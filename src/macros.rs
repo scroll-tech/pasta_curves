@@ -151,3 +151,35 @@ macro_rules! impl_binops_multiplicative {
         }
     };
 }
+
+macro_rules! impl_binops_multiplicative_additive {
+    ($lhs:ident, $rhs:ident) => {
+        impl ::ff::MulAddAssign<$lhs, $rhs> for $lhs {
+            #[inline]
+            fn mul_add_assign(&mut self, a: $lhs, b: $rhs) {
+                *self = *self * a + b;
+            }
+        }
+
+        impl<'a> ::ff::MulAddAssign<&'a $lhs, $rhs> for $lhs {
+            #[inline]
+            fn mul_add_assign(&mut self, a: &'a $lhs, b: $rhs) {
+                *self = *self * a + b;
+            }
+        }
+
+        impl<'a> ::ff::MulAddAssign<$lhs, &'a $rhs> for $lhs {
+            #[inline]
+            fn mul_add_assign(&mut self, a: $lhs, b: &'a $rhs) {
+                *self = *self * a + b;
+            }
+        }
+
+        impl<'a, 'b> ::ff::MulAddAssign<&'a $lhs, &'b $rhs> for $lhs {
+            #[inline]
+            fn mul_add_assign(&mut self, a: &'a $lhs, b: &'b $rhs) {
+                *self = *self * a + b;
+            }
+        }
+    };
+}
